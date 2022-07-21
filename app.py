@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 import uvicorn
+import tensorflow as tf
 from fastapi import FastAPI
 from pydantic import BaseModel
 from predict import predict
@@ -9,8 +10,13 @@ class Item(BaseModel):
 @app.get('/')
 def index(item:Item):
     print(item.data)
-    val=predict(item.data)
-    return {'value': val}
+    @tf.keras.utils.register_keras_serializable()
+    def create_model():
+        new_model=tf.keras.models.load_model('./models/pubmed_model')
+        return new_model
+    val=predict(item.data,create_model())
+    print(val)
+    return {'value': "hello"}
 
 # 5. Run the API with uvicorn
 #    Will run on http://127.0.0.1:8000

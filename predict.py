@@ -1,5 +1,5 @@
 from imp import new_module
-import string
+from construct import construct
 import tensorflow as tf
 import pandas as pd
 import numpy as np
@@ -41,6 +41,10 @@ def convert_to_df(abstract:str):
 
 def predict(input:str,model):
     (df,org)=convert_to_df(input)
-    tf_data_df=tf.data.Dataset.from_tensor_slices((df['text'].to_numpy(),df['char_text'].to_numpy(),df['location'].to_numpy()))
-    output=model.predict(tf_data_df)
+    dummy=tf.zeros([len(df),5],dtype=tf.dtypes.float32)
+    dummy=tf.data.Dataset.from_tensor_slices(dummy)
+    new_dataset=tf.data.Dataset.zip((tf.data.Dataset.from_tensor_slices((df['text'].to_numpy(),df['char_text'].to_numpy(),df['location'].to_numpy())),dummy)).batch(32).prefetch(tf.data.AUTOTUNE)
+    output=model.predict(new_dataset)
+    output=tf.argmax(output,axis=1)
+    output=construct(output,org)
     return output

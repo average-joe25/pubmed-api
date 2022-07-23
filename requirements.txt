@@ -4,8 +4,5 @@ httptools==0.4.0
 numpy==1.23.1
 pandas==1.4.3
 pydantic==1.9.1
-rsa==4.8
 tensorflow==2.9.1
-tensorflow-estimator==2.9.0
-tensorflow-io-gcs-filesystem==0.26.0
 uvicorn==0.18.2

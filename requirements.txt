@@ -7,5 +7,5 @@ uvicorn
 gunicorn
 httptools
 tensorflow
-BaseModel
 gunicorn
+uvloop

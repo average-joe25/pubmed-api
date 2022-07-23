@@ -2,7 +2,6 @@ from imp import new_module
 from construct import construct
 import tensorflow as tf
 import pandas as pd
-import numpy as np
 def clean(abstract:str):
     cleaned=""
     for ch in abstract:

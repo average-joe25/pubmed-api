@@ -1,11 +1,9 @@
 numpy
-scipy
-scikit-learn
 pandas
+tensorflow
 fastapi
 uvicorn
 gunicorn
 httptools
-tensorflow
 gunicorn
 uvloop

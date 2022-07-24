@@ -1,7 +1,7 @@
 # pubmed-api
 An api built to pubmed rct dataset to classify medical abstract into Background ,Objective, method, results, conclusion based on a custom built Tensorflow2.x deep Model
 <h3>API CALL link : https://pubmed-api-test.herokuapp.com/</h3>
-<h3>Tech Stack: FastApi, Tensorflow2.x, pandas, Uvicorn</h3>
+<h3>Tech Stack: FastApi, Tensorflow2.x, pandas, Uvicorn, Heroku</h3>
 <h2>DOCS:</h2>
 <p>
 <b>opensourced for any user to call no api-key required</b><br>

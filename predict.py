@@ -16,6 +16,7 @@ def shorten(text):
   size=np.minimum(50,len(lists))
   t = " ".join(lists[:size])
   return t   
+
 def convert_to_df(abstract:str):
     list_lines=abstract.split('.')
     org_text=[]
@@ -36,6 +37,7 @@ def convert_to_df(abstract:str):
     return (new_df,org_text)
 
 def predict(input:str,model):
+    
     (df,org)=convert_to_df(input)
     dummy=tf.zeros([len(df),5],dtype=tf.dtypes.float32)
     dummy=tf.data.Dataset.from_tensor_slices(dummy)

@@ -16,8 +16,6 @@ def shorten(text):
   size=np.minimum(50,len(lists))
   t = " ".join(lists[:size])
   return t   
-def CharTransform(x):
-    return " ".join(list(x))
 def convert_to_df(abstract:str):
     list_lines=abstract.split('.')
     org_text=[]
@@ -35,15 +33,13 @@ def convert_to_df(abstract:str):
         count+=1
     new_df=pd.DataFrame(dict_list)
     
-    new_df['char_text']=new_df['text'].apply(CharTransform)
-    
     return (new_df,org_text)
 
 def predict(input:str,model):
     (df,org)=convert_to_df(input)
     dummy=tf.zeros([len(df),5],dtype=tf.dtypes.float32)
     dummy=tf.data.Dataset.from_tensor_slices(dummy)
-    new_dataset=tf.data.Dataset.zip((tf.data.Dataset.from_tensor_slices((df['text'].to_numpy(),df['char_text'].to_numpy(),df['location'].to_numpy())),dummy)).batch(32).prefetch(tf.data.AUTOTUNE)
+    new_dataset=tf.data.Dataset.zip((tf.data.Dataset.from_tensor_slices((df['text'].to_numpy(),df['location'].to_numpy())),dummy)).batch(32).prefetch(tf.data.AUTOTUNE)
     output=model.predict(new_dataset)
     output=tf.argmax(output,axis=1)
     output=construct(output,org)

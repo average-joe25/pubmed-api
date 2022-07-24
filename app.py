@@ -5,8 +5,6 @@ from fastapi import FastAPI
 from pydantic import BaseModel
 from predict import predict
 app = FastAPI()
-
-@tf.keras.utils.register_keras_serializable()
 def create_model():
     return tf.keras.models.load_model('./models/pubmed_model')
 
